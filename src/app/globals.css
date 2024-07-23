@@ -247,6 +247,7 @@ a {
   color: #4c965c;
   overflow-y: hidden;
   font-weight: 100;
+  background: #fff;
 }
 
 .retry {

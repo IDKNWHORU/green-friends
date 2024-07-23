@@ -33,7 +33,7 @@ export default function () {
       const modelName = process.env.NEXT_PUBLIC_MODEL_NAME;
 
       let info =
-        "무슨 쓰레기인지 잘 모르겠어.\n주위를 정리하고 사진을 다시 찍어줄래?";
+        "무슨 쓰레기인지 잘 모르겠어.\n주위를 정리하고\n사진을 다시 찍어줄래?";
 
       try {
         const credentials = new ApiKeyCredentials({
