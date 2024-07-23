@@ -338,7 +338,7 @@ a {
 
 .install-message {
   position: fixed;
-  bottom: 40px;
+  bottom: 20px;
   margin: 0 auto;
   cursor: pointer;
   font-family: BMJUA;
