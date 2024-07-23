@@ -9,6 +9,7 @@ export default function () {
   const [result, setResult] = useState("");
   const [pending, setPending] = useState(false);
   const fileRef = useRef();
+  const [selectedImage, setSelectedImage] = useState("");
 
   const items = {
     glass: "이건 유리야!🔍\n유리병은 깨질 수 있으니 던지지 말고 조심히 버려줘!",
@@ -25,14 +26,14 @@ export default function () {
 
     const reader = new FileReader();
 
-    reader.onloadend = async () => {
+    reader.onloadend = async (loadEvt) => {
       const predictionKey = process.env.NEXT_PUBLIC_PREDICTION_KEY;
       const predictionEndpoint = process.env.NEXT_PUBLIC_PREDICTION_END_POINT;
       const projectId = process.env.NEXT_PUBLIC_PROJECT_ID;
       const modelName = process.env.NEXT_PUBLIC_MODEL_NAME;
 
       let info =
-        "무슨 쓰레기인지 잘 모르겠어. 주위를 정리하고 사진을 다시 찍어줄래?";
+        "무슨 쓰레기인지 잘 모르겠어.\n주위를 정리하고 사진을 다시 찍어줄래?";
 
       try {
         const credentials = new ApiKeyCredentials({
@@ -58,6 +59,7 @@ export default function () {
         }
 
         setTimeout(() => {
+          setSelectedImage(loadEvt.target.result);
           setResult(info);
           setPending(false);
         }, 3000);
@@ -68,8 +70,14 @@ export default function () {
     reader.readAsDataURL(selectedFile);
   };
 
-  const handle = () => {
+  const handleClickBox = () => {
     fileRef.current.click();
+  };
+
+  const handleRetry = () => {
+    setPending(false);
+    setResult("");
+    setSelectedImage("");
   };
 
   return (
@@ -78,8 +86,17 @@ export default function () {
         <Image src="/loading.png" fill={true} />
       ) : result === "" ? (
         <>
-          <h1 className="operate">버리려는 쓰레기를 찍어봐!</h1>
-          <section className="box" onClick={handle}>
+          <section className="content">
+            <h1 className="operate">버리려는 쓰레기를 찍어봐!</h1>
+            <div className="box" onClick={handleClickBox}>
+              <Image
+                className="cam"
+                src="/cam.png"
+                alt="cam"
+                width={140}
+                height={140}
+              />
+            </div>
             <form action="" className="hidden">
               <input
                 ref={fileRef}
@@ -97,7 +114,28 @@ export default function () {
           </footer>
         </>
       ) : (
-        <textarea readOnly rows={5} defaultValue={result} />
+        <>
+          <section className="result">
+            <div className="header1">
+              <div className="box2">
+                <Image src={selectedImage} fill={true} alt="선택된 이미지" />
+              </div>
+            </div>
+            <form className="body1" action="">
+              <textarea
+                className="message"
+                defaultValue={result}
+                placeholder="무슨 쓰레기인지 잘 모르겠어. 주위를 정리하고 사진을 다시 찍어줄래?"
+                readOnly
+              />
+            </form>
+            <div className="footer1">
+              <button className="retry" type="button" onClick={handleRetry}>
+                다시 찍어보기
+              </button>
+            </div>
+          </section>
+        </>
       )}
     </article>
   );
