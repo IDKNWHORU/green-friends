@@ -9,11 +9,9 @@ export default function Home() {
         className="background"
         src="/background.png"
         alt="background"
-        // width={0}
-        // height={0}
         fill={true}
       />
-      <Link className="link" href="https://32c4c8a4ea4504350d.gradio.live/">
+      <Link className="link" href="/classify">
         시작하기
       </Link>
     </main>
