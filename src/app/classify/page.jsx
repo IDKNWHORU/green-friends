@@ -83,7 +83,32 @@ export default function () {
   return (
     <article className="bg">
       {pending ? (
-        <Image src="/loading.png" fill={true} />
+        <div className="loading">
+          <div className="loading-message">
+            <span>쓰</span>
+            <span>레</span>
+            <span>기</span>
+            <span>를</span>
+            <span> 요</span>
+            <span>리</span>
+            <span>조</span>
+            <span>리</span>
+            <span> 살</span>
+            <span>펴</span>
+            <span>보</span>
+            <span>는</span>
+            <span> 중</span>
+            <span>.</span>
+            <span>.</span>
+            <span>.</span>
+          </div>
+          <Image
+            src="/char2.png"
+            alt="loading.."
+            width={140}
+            height={140}
+          ></Image>
+        </div>
       ) : result === "" ? (
         <>
           <section className="content">
