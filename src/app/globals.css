@@ -335,3 +335,14 @@ a {
     transform: translateY(15px);
   }
 }
+
+.install-message {
+  position: fixed;
+  bottom: 40px;
+  margin: 0 auto;
+  cursor: pointer;
+  font-family: BMJUA;
+  font-weight: 100;
+  font-size: 40px;
+  color: #4c965c;
+}
